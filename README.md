@@ -21,19 +21,22 @@ homer项目提供了这样的一种解决方案：通过Javaagent技术，为jav
 
 * 通过httpheader方式：
 
-  无论是前端还是java上游服务，都可以手动在request中添加header信息，需要注意的是，header信息必须以**homer-**作为前缀，以HttpClient为例，放入header：HttpRequest.addHeader("homer-token","123456");
+  无论是前端还是java上游服务，都可以手动在request中添加header信息，需要注意的是，header信息必须以**X-homer-**(可以自定义)作为前缀，以HttpClient为例，放入header：HttpRequest.addHeader("X-homer-token","123456");
+  自定义修改homer-client/src/main/java/com/kkb/common/homer/client/HomerUtil.java
+  public static final String HOMER_HEADER_PREFIX = "X-homer-"; // 可以自定义修改
 
-  通过HttpServletRequest获取header，httpServletRequest.getHeader("homer-token").
+
+  通过HttpServletRequest获取header，httpServletRequest.getHeader("X-homer-token").
 
 * 通过HomerClient方式：
 
-  homer会为应用提供一个homer-client工具包，用来很方便的存取key value，并且key**不用添加homer-**前缀，和HashMap使用方法类似，**推荐引入使用**。使用方法：
+  homer会为应用提供一个homer-client工具包，用来很方便的存取key value，并且key**不用添加X-homer-**前缀，和HashMap使用方法类似，**推荐引入使用**。使用方法：
 
   HomerUtil.set("token","123456");
 
   HomerUtil.get("token");
 
-  **注意**：header信息本身是一直要添加homer-前缀的，只是使用homer-client方式时省去了前缀操作而已。
+  **注意**：header信息本身是一直要添加X-homer-前缀的，只是使用homer-client方式时省去了前缀操作而已。
 
 ##### 3、使用限制
 
@@ -57,7 +60,7 @@ homer是解决javaweb项目下的实现，所以使用时会有以下限制：
 
 ##### 2、技术实现简单介绍
 
-	* 请求进来时，拦截HttpServletRequest，添加获取到homer-开头的header信息，放入TransmittableThreadLocal<HomerContext>中
+	* 请求进来时，拦截HttpServletRequest，添加获取到X-homer-开头的header信息，放入TransmittableThreadLocal<HomerContext>中
 	* HomerContext继承自HashMap，所以本身也是key-value的数据结构
 	* 请求发送时，拦截指定客户端request，将TransmittableThreadLocal<HomerContext>中的所有key-value放入request并传递
 
