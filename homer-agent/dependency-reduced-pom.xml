@@ -47,8 +47,15 @@
               <include>net.bytebuddy:byte-buddy-agent:jar:</include>
               <include>com.alibaba:transmittable-thread-local:</include>
               <include>com.kkb.common.homer:homer-client</include>
+              <include>javax.servlet:javax.servlet-api:</include>
             </includes>
           </artifactSet>
+          <relocations>
+            <relocation>
+              <pattern>net.bytebuddy</pattern>
+              <shadedPattern>kkb.homer.openapi.net.bytebuddy</shadedPattern>
+            </relocation>
+          </relocations>
         </configuration>
       </plugin>
       <plugin>
@@ -89,44 +96,27 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>5.2.6.RELEASE</version>
-      <scope>compile</scope>
-      <optional>true</optional>
+      <version>5.2.15.RELEASE</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.github.openfeign</groupId>
       <artifactId>feign-core</artifactId>
-      <version>10.4.0</version>
-      <scope>compile</scope>
-      <optional>true</optional>
+      <version>10.12</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpcore</artifactId>
-      <version>4.4.13</version>
-      <scope>compile</scope>
-      <optional>true</optional>
+      <version>4.4.14</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
-      <version>3.12.0</version>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.12</version>
+      <version>3.14.4</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
