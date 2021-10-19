@@ -9,7 +9,8 @@ import com.kkb.common.homer.core.HomerContextHolder;
  */
 public class HomerUtil {
 
-    public static final String HOMER_HEADER_PREFIX = "homer-";
+    // you could customise header prefix
+    public static final String HOMER_HEADER_PREFIX = "X-homer-";
 
 
     /**
