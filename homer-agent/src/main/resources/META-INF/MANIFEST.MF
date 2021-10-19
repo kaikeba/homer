@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Can-Retransform-Classes: true
+Can-Redefine-Classes: true
+Premain-Class: com.kaikeba.common.homer.agent.Premain
